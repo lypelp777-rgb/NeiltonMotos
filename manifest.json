@@ -1,0 +1,22 @@
+{
+  "id": "./telainicial.html",
+  "name": "Neilton Motos",
+  "short_name": "Neilton Motos",
+  "description": "Mecânica especializada em motos em Fortaleza-CE — revisão, motor, óleo e peças com precisão e confiança.",
+  "start_url": "./telainicial.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#060505",
+  "theme_color": "#B00000",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["business", "automotive", "shopping"],
+  "icons": [
+    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "./icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

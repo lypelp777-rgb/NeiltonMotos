@@ -1,0 +1,2503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revisões – Nelton Motos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================
+   VARIABLES & RESET
+============================================ */
+:root {
+  --red:        #CC0000;
+  --red-hot:    #FF1A1A;
+  --red-glow:   #FF000066;
+  --wine:       #6B0000;
+  --wine-deep:  #3D0000;
+  --black:      #080808;
+  --black-card: #111111;
+  --black-mid:  #1A1A1A;
+  --white:      #F5F5F5;
+  --white-dim:  #AAAAAA;
+  --chrome:     #C0C0C0;
+  --chrome-dim: #888888;
+  --gold:       #FFB800;
+  --silver:     #B0B8C8;
+  --bronze:     #CD7F32;
+  --green:      #128C7E;
+  --green-light:#25D366;
+  --pix:        #00BDAE;
+  --pix-dark:   #007F74;
+
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-ui:      'Rajdhani', sans-serif;
+  --font-tech:    'Orbitron', sans-serif;
+
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  --glow-red: 0 0 18px #CC000088, 0 0 40px #CC000033;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+/* ============================================
+   HERO ENTRANCE
+============================================ */
+.hero-entrance {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 80px 24px 60px;
+  text-align: center;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 50% at 50% 110%, #8B000055 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 10% 20%, #CC000018 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 90% 10%, #CC000018 0%, transparent 60%),
+    linear-gradient(170deg, #0D0000 0%, #050000 45%, #000000 100%);
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(#CC00000A 1px, transparent 1px),
+    linear-gradient(90deg, #CC00000A 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+  animation: grid-drift 30s linear infinite;
+}
+@keyframes grid-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 60px 60px; }
+}
+
+.hero-scan {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 0%, #CC000008 50%, transparent 100%);
+  background-size: 100% 4px;
+  animation: scan 10s linear infinite;
+  pointer-events: none;
+}
+@keyframes scan {
+  0%   { background-position: 0 -100vh; }
+  100% { background-position: 0 200vh; }
+}
+
+.slash-deco {
+  position: absolute;
+  width: 200%; height: 2px;
+  background: linear-gradient(90deg, transparent, #CC000033, transparent);
+  transform: rotate(-15deg);
+  pointer-events: none;
+}
+.slash-deco:nth-child(1) { top: 25%; left: -50%; }
+.slash-deco:nth-child(2) { top: 55%; left: -50%; opacity: 0.5; }
+.slash-deco:nth-child(3) { top: 80%; left: -50%; opacity: 0.3; }
+
+.hero-entrance::before, .hero-entrance::after {
+  content: '';
+  position: absolute;
+  width: 80px; height: 80px;
+  border-style: solid;
+  border-color: var(--red);
+  border-width: 0;
+  opacity: 0.6;
+}
+.hero-entrance::before { top: 24px; left: 24px; border-top-width: 2px; border-left-width: 2px; }
+.hero-entrance::after  { bottom: 24px; right: 24px; border-bottom-width: 2px; border-right-width: 2px; }
+
+.hero-inner { position: relative; z-index: 2; max-width: 900px; }
+
+.hero-glyph {
+  font-size: clamp(3rem, 8vw, 5rem);
+  margin-bottom: 24px;
+  display: block;
+  filter: drop-shadow(0 0 20px #CC0000AA);
+  animation: glyph-pulse 3s ease-in-out infinite;
+}
+@keyframes glyph-pulse {
+  0%, 100% { transform: scale(1) rotate(-5deg); filter: drop-shadow(0 0 20px #CC0000AA); }
+  50%       { transform: scale(1.08) rotate(5deg); filter: drop-shadow(0 0 35px #FF0000CC); }
+}
+
+.hero-eyebrow {
+  font-family: var(--font-tech);
+  font-size: clamp(0.5rem, 1.5vw, 0.65rem);
+  letter-spacing: 8px;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '';
+  flex: 1;
+  max-width: 100px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red));
+}
+.hero-eyebrow::after { background: linear-gradient(90deg, var(--red), transparent); }
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 12vw, 8rem);
+  line-height: 0.85;
+  letter-spacing: 6px;
+  color: var(--white);
+  text-shadow: 0 0 40px #CC000055;
+  margin-bottom: 12px;
+  animation: title-in 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes title-in {
+  from { opacity: 0; transform: translateY(40px) skewX(-3deg); }
+  to   { opacity: 1; transform: translateY(0) skewX(0); }
+}
+.hero-title span { color: var(--red-hot); text-shadow: var(--glow-red), 0 0 80px #FF000033; }
+
+.hero-desc {
+  font-family: var(--font-ui);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 500;
+  color: var(--chrome);
+  letter-spacing: 2px;
+  max-width: 600px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+  animation: fade-up 1.2s 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-tech);
+  font-size: 0.5rem;
+  letter-spacing: 4px;
+  color: var(--chrome-dim);
+  text-transform: uppercase;
+  animation: bounce-down 2s ease-in-out infinite;
+}
+.scroll-indicator::after { content: '▼'; font-size: 0.6rem; color: var(--red); }
+@keyframes bounce-down {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ============================================
+   SECTION COMMONS
+============================================ */
+section {
+  padding: 80px 24px;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header { text-align: center; margin-bottom: 60px; }
+
+.section-eyebrow {
+  font-family: var(--font-tech);
+  font-size: 0.6rem;
+  letter-spacing: 5px;
+  color: var(--red);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.section-eyebrow::before, .section-eyebrow::after {
+  content: ''; width: 40px; height: 1px; background: var(--red);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  letter-spacing: 4px;
+  line-height: 1;
+  color: var(--white);
+  text-shadow: 0 0 30px #CC000033;
+}
+
+.section-divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin-top: 20px;
+}
+.section-divider::before, .section-divider::after {
+  content: ''; flex: 1; max-width: 120px; height: 1px;
+  background: linear-gradient(90deg, transparent, #CC000066);
+}
+.section-divider::after { background: linear-gradient(90deg, #CC000066, transparent); }
+.divider-diamond {
+  width: 8px; height: 8px; background: var(--red);
+  transform: rotate(45deg); box-shadow: 0 0 10px var(--red);
+}
+
+.reveal {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================
+   PLAN TABS
+============================================ */
+.plans-section { padding-top: 20px; scroll-margin-top: 20px; }
+
+/* ============================================
+   PLAN SELECTOR — cards dinâmicos com preview de preço
+============================================ */
+.plan-tabs {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  margin-bottom: 40px; max-width: 900px; margin-left: auto; margin-right: auto;
+}
+
+.plan-tab {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 22px 10px 18px;
+  background: linear-gradient(160deg, #141414, #0D0000);
+  border: 1px solid #CC000033; border-radius: 12px;
+  color: var(--white-dim); font-family: var(--font-ui);
+  overflow: hidden; isolation: isolate;
+  transition: transform 0.25s cubic-bezier(0.2,0.8,0.2,1), border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.plan-tab::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; opacity: 0;
+  background: linear-gradient(150deg, var(--tab-glow, var(--red)) 0%, transparent 70%);
+  transition: opacity 0.3s;
+}
+.plan-tab:nth-child(1) { --tab-glow: #2255CC55; }
+.plan-tab:nth-child(2) { --tab-glow: #FFB80044; }
+.plan-tab:nth-child(3) { --tab-glow: #FF006644; }
+
+.plan-tab .tab-icon {
+  font-size: 1.6rem; line-height: 1;
+  filter: drop-shadow(0 0 8px #00000088);
+}
+.plan-tab .tab-name {
+  font-size: clamp(0.8rem, 2vw, 0.95rem); font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--white);
+}
+.plan-tab .tab-price {
+  font-family: var(--font-tech); font-size: 0.62rem;
+  letter-spacing: 0.5px; color: var(--chrome-dim);
+}
+.plan-tab .tab-price b { color: var(--red-hot); font-size: 0.78rem; }
+.plan-tab .tab-check {
+  position: absolute; top: 10px; right: 10px;
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid #CC000055; display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem; color: transparent; transition: all 0.25s;
+}
+
+.plan-tab:hover { transform: translateY(-3px); border-color: #CC000066; }
+.plan-tab:hover::before { opacity: 1; }
+
+.plan-tab.active {
+  transform: translateY(-3px);
+  border-color: var(--red);
+  background: linear-gradient(160deg, #1A0505, #0D0000);
+  box-shadow: 0 8px 28px -8px #CC000066, inset 0 0 0 1px #CC000022;
+}
+.plan-tab.active::before { opacity: 1; }
+.plan-tab.active .tab-check {
+  background: var(--red); border-color: var(--red); color: var(--white);
+}
+
+@media (max-width: 700px) {
+  .plan-tabs { grid-template-columns: 1fr; gap: 10px; }
+  .plan-tab { flex-direction: row; justify-content: flex-start; gap: 14px; padding: 16px 44px 16px 18px; text-align: left; }
+  .plan-tab .tab-icon { font-size: 1.4rem; }
+  .plan-tab .tab-name, .plan-tab .tab-price { display: block; }
+}
+
+/* ============================================
+   PLAN CARDS
+============================================ */
+.plan-panel { display: none; animation: panel-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both; scroll-margin-top: 20px; }
+.plan-panel.active { display: block; }
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.plan-card {
+  background: linear-gradient(145deg, #111111, #0D0000);
+  border: 1px solid #CC000033; border-radius: 8px;
+  overflow: hidden; position: relative;
+}
+.plan-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: linear-gradient(90deg, transparent, var(--red), transparent);
+}
+
+.plan-header {
+  padding: 40px 40px 32px; position: relative;
+  overflow: hidden; border-bottom: 1px solid #CC000022;
+}
+.plan-header-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 100% at 80% 50%, #CC000015 0%, transparent 70%);
+  pointer-events: none;
+}
+.plan-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-tech); font-size: 0.55rem;
+  letter-spacing: 4px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 3px; margin-bottom: 16px;
+}
+.badge-basic   { background: #1A1A2E; border: 1px solid #4466CC55; color: #6699FF; }
+.badge-padrao  { background: #1A1500; border: 1px solid #FFB80055; color: var(--gold); }
+.badge-premium { background: #1A0008; border: 1px solid #FF006655; color: #FF4488; }
+
+.plan-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  letter-spacing: 4px; line-height: 1; margin-bottom: 8px;
+}
+.plan-slogan { font-family: var(--font-ui); font-size: 1rem; color: var(--chrome-dim); font-style: italic; letter-spacing: 1px; }
+
+.plan-body {
+  padding: 40px; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 40px;
+}
+@media (max-width: 700px) {
+  .plan-body { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
+  .plan-header { padding: 28px 24px 24px; }
+}
+
+.plan-block-title {
+  font-family: var(--font-tech); font-size: 0.58rem;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--red); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.plan-block-title::after { content: ''; flex: 1; height: 1px; background: #CC000033; }
+
+.service-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.service-list li {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-ui); font-size: 1rem;
+  font-weight: 600; color: var(--white-dim); transition: color 0.2s;
+}
+.service-list li:hover { color: var(--white); }
+.service-list li::before {
+  content: '✓'; display: flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; min-width: 20px;
+  background: #CC000022; border: 1px solid #CC000066;
+  border-radius: 50%; color: var(--red); font-size: 0.7rem; font-weight: 900;
+}
+
+.price-table { width: 100%; border-collapse: collapse; }
+.price-table thead tr { border-bottom: 1px solid #CC000033; }
+.price-table th {
+  font-family: var(--font-tech); font-size: 0.55rem;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--chrome-dim); padding: 8px 0; text-align: left;
+}
+.price-table th:last-child { text-align: right; }
+.price-table tbody tr { border-bottom: 1px solid #CC000011; transition: background 0.2s; }
+.price-table tbody tr:hover { background: #CC000010; }
+.price-table td {
+  padding: 12px 0; font-family: var(--font-ui);
+  font-size: 1rem; font-weight: 600; color: var(--white-dim);
+}
+.price-table td:last-child {
+  text-align: right; font-family: var(--font-display);
+  font-size: 1.4rem; color: var(--red-hot); letter-spacing: 1px;
+}
+.cc-tag {
+  display: block; font-family: var(--font-tech); font-size: 0.55rem;
+  letter-spacing: 1px; color: var(--chrome-dim); font-weight: 500;
+  margin-top: 2px; text-transform: none;
+}
+
+.benefits-list { list-style: none; display: flex; flex-direction: column; gap: 8px; grid-column: 1 / -1; }
+.benefits-list li {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-ui); font-size: 0.95rem; color: var(--chrome-dim);
+}
+.benefits-list li .bicon { font-size: 0.8rem; }
+
+.plan-quote {
+  grid-column: 1 / -1; border: 1px solid #CC000033; border-left: 3px solid var(--red);
+  padding: 16px 20px; background: #CC000008; border-radius: 0 4px 4px 0;
+  font-family: var(--font-ui); font-size: 1rem; font-style: italic;
+  color: var(--chrome); letter-spacing: 0.5px;
+}
+
+.plan-cta { grid-column: 1 / -1; display: flex; justify-content: center; margin-top: 8px; }
+.btn-schedule {
+  display: flex; align-items: center; gap: 12px;
+  padding: 18px 48px; background: linear-gradient(135deg, var(--red), var(--wine));
+  border: 1px solid var(--red); border-radius: 4px; color: var(--white);
+  font-family: var(--font-ui); font-size: 1.1rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  transition: all var(--transition); box-shadow: 0 4px 24px #CC000055;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+}
+.btn-schedule:hover {
+  background: linear-gradient(135deg, var(--red-hot), var(--red));
+  box-shadow: 0 6px 40px #CC000099; transform: translateY(-2px);
+}
+
+/* ============================================
+   PHOTO GALLERY
+============================================ */
+.gallery-section { padding: 60px 24px; max-width: 1200px; margin: 0 auto; }
+
+.photo-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 3px; border-radius: 8px; overflow: hidden; position: relative;
+}
+.photo-grid::before {
+  content: ''; position: absolute; inset: 0;
+  border: 1px solid #CC000033; border-radius: 8px; z-index: 2; pointer-events: none;
+}
+
+.photo-item {
+  position: relative; aspect-ratio: 4/3;
+  overflow: hidden; background: #111;
+}
+.photo-item.tall { grid-row: span 2; aspect-ratio: auto; }
+.photo-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(20%) contrast(1.1);
+  transition: transform 0.6s cubic-bezier(0.2,0.8,0.2,1), filter 0.4s;
+}
+.photo-item:hover img { transform: scale(1.05); filter: grayscale(0%) contrast(1.2); }
+.photo-item::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 40%, #000000AA 100%); pointer-events: none;
+}
+.photo-label {
+  position: absolute; bottom: 10px; left: 12px; z-index: 2;
+  font-family: var(--font-tech); font-size: 0.5rem;
+  letter-spacing: 3px; text-transform: uppercase; color: #ffffff88;
+}
+.photo-svg { width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 600px) {
+  .photo-grid { grid-template-columns: 1fr 1fr; }
+  .photo-item.tall { grid-row: span 1; aspect-ratio: 4/3; }
+}
+
+/* ============================================
+   MODAL — BASE
+============================================ */
+.modal-backdrop {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.90); backdrop-filter: blur(8px);
+  z-index: 500; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-backdrop.open { display: flex; animation: backdrop-in 0.3s ease both; }
+@keyframes backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  background: linear-gradient(145deg, #111111, #0D0000);
+  border: 1px solid #CC000055; border-radius: 10px;
+  width: 100%; max-width: 580px; max-height: 92vh;
+  overflow-y: auto; position: relative;
+  animation: modal-in 0.4s cubic-bezier(0.2,0.8,0.2,1) both;
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(32px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: linear-gradient(90deg, transparent, var(--red), transparent);
+}
+
+.modal-header {
+  padding: 32px 32px 24px; border-bottom: 1px solid #CC000022;
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.modal-plan-name {
+  font-family: var(--font-display); font-size: 2rem;
+  letter-spacing: 3px; color: var(--red-hot); line-height: 1; margin-bottom: 4px;
+}
+.modal-subtitle {
+  font-family: var(--font-tech); font-size: 0.55rem;
+  letter-spacing: 4px; color: var(--chrome-dim); text-transform: uppercase;
+}
+.modal-close {
+  width: 36px; height: 36px; border: 1px solid #CC000033; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: var(--white-dim); transition: all 0.2s; flex-shrink: 0;
+}
+.modal-close:hover { background: #CC000022; color: var(--white); border-color: var(--red); }
+
+.modal-body { padding: 28px 32px 32px; }
+
+.form-group { margin-bottom: 24px; }
+.form-label {
+  display: block; font-family: var(--font-tech); font-size: 0.55rem;
+  letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 10px;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.form-select, .form-input {
+  width: 100%; padding: 14px 16px; background: #0D0D0D;
+  border: 1px solid #CC000033; border-radius: 4px; color: var(--white);
+  font-family: var(--font-ui); font-size: 1rem; font-weight: 600;
+  transition: border-color 0.2s, box-shadow 0.2s; appearance: none; -webkit-appearance: none;
+}
+.form-select:focus, .form-input:focus {
+  outline: none; border-color: var(--red); box-shadow: 0 0 0 3px #CC000022;
+}
+.form-select option { background: #111; color: var(--white); }
+.form-select option:disabled { color: #444; }
+
+.select-wrap { position: relative; }
+.select-wrap::after {
+  content: '▼'; position: absolute; right: 14px; top: 50%;
+  transform: translateY(-50%); font-size: 0.65rem; color: var(--red); pointer-events: none;
+}
+
+/* Time slots */
+.time-slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; }
+.time-slot.late-slot::after {
+  content: '🌙';
+  position: absolute; top: -7px; right: -6px;
+  font-size: 0.7rem;
+  filter: drop-shadow(0 0 3px #000);
+}
+
+.sched-warning {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-top: 10px; padding: 12px 14px;
+  background: linear-gradient(135deg, #2A1500, #1A0D00);
+  border: 1px solid #FFB80055; border-left: 3px solid var(--gold);
+  border-radius: 6px;
+}
+.sched-warning .sw-icon { font-size: 1.15rem; line-height: 1; flex-shrink: 0; }
+.sched-warning .sw-text {
+  font-family: var(--font-ui); font-size: 0.85rem; font-weight: 600;
+  color: #FFD27A; line-height: 1.5; letter-spacing: 0.3px;
+}
+.sched-warning .sw-text b { color: var(--gold); }
+.time-slot {
+  padding: 10px 4px; background: #0D0D0D; border: 1px solid #CC000033;
+  border-radius: 4px; color: var(--white-dim); font-family: var(--font-ui);
+  font-size: 0.9rem; font-weight: 700; text-align: center; transition: all 0.2s; position: relative;
+}
+.time-slot:hover:not(.disabled) { border-color: var(--red); color: var(--white); background: #CC000015; }
+.time-slot.selected {
+  background: linear-gradient(135deg, var(--red), var(--wine));
+  border-color: var(--red); color: var(--white); box-shadow: 0 0 12px #CC000055;
+}
+.time-slot.disabled {
+  opacity: 0.28; cursor: not-allowed; text-decoration: line-through; border-color: #333; color: #555;
+}
+.time-slot.disabled::after {
+  content: 'passado'; display: block; font-size: 0.52rem;
+  letter-spacing: 1px; color: #555; text-decoration: none; margin-top: 2px;
+}
+
+/* Bike types */
+.bike-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.bike-type-btn {
+  padding: 14px 8px; background: #0D0D0D; border: 1px solid #CC000033;
+  border-radius: 4px; color: var(--white-dim); font-family: var(--font-ui);
+  font-size: 0.85rem; font-weight: 700; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 6px; transition: all 0.2s;
+}
+.bike-type-btn .bicon { font-size: 1.4rem; }
+.bike-type-btn .bcc {
+  font-family: var(--font-tech); font-size: 0.5rem; letter-spacing: 0.5px;
+  color: var(--chrome-dim); font-weight: 500; text-transform: none;
+}
+.bike-type-btn.selected .bcc { color: #FFD9D9; }
+.bike-type-btn:hover { border-color: var(--red); color: var(--white); background: #CC000015; }
+.bike-type-btn.selected {
+  background: linear-gradient(135deg, var(--red), var(--wine));
+  border-color: var(--red); color: var(--white); box-shadow: 0 0 12px #CC000055;
+}
+
+/* Date info badge */
+.date-info {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+  font-family: var(--font-tech); font-size: 0.52rem;
+  letter-spacing: 3px; color: var(--chrome-dim); text-transform: uppercase;
+}
+.date-badge {
+  background: #CC000015; border: 1px solid #CC000033; border-radius: 3px;
+  padding: 3px 8px; color: var(--red); font-family: var(--font-tech);
+  font-size: 0.52rem; letter-spacing: 2px;
+}
+
+/* ============================================
+   PAYMENT SECTION — NOVO
+============================================ */
+.payment-section {
+  background: linear-gradient(145deg, #0A0500, #0D0D0D);
+  border: 1px solid #FFB80033;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.payment-section::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.payment-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+}
+.payment-header-icon{
+  font-size: 1.4rem;
+}
+
+.payment-header-text{
+  display:flex;
+  flex-direction:column;
+}
+
+.payment-header-title{
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  line-height: 1;
+}
+.payment-header-sub {
+  font-family: var(--font-tech); font-size: 0.52rem;
+  letter-spacing: 3px; color: var(--chrome-dim); text-transform: uppercase;
+}
+
+/* Sinal display */
+.sinal-display {
+  background: #CC000010;
+  border: 1px solid #CC000033;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.sinal-display-left {
+  font-family: var(--font-tech); font-size: 0.52rem;
+  letter-spacing: 3px; color: var(--chrome-dim); text-transform: uppercase;
+}
+.sinal-display-right {
+  display: flex; align-items: baseline; gap: 6px;
+}
+.sinal-label {
+  font-family: var(--font-tech); font-size: 0.55rem;
+  letter-spacing: 2px; color: var(--chrome-dim); text-transform: uppercase;
+}
+.sinal-value {
+  font-family: var(--font-display); font-size: 2rem;
+  color: var(--gold); letter-spacing: 2px;
+  text-shadow: 0 0 20px #FFB80066;
+}
+.sinal-value.hidden { color: var(--chrome-dim); font-size: 1.2rem; }
+
+/* Payment methods */
+.payment-methods-label {
+  font-family: var(--font-tech); font-size: 0.55rem;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--red); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.payment-methods-label::after { content: ''; flex: 1; height: 1px; background: #CC000033; }
+
+.payment-methods-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  margin-bottom: 20px;
+}
+
+.payment-method-btn {
+  padding: 16px 8px; background: #0D0D0D;
+  border: 1px solid #CC000033; border-radius: 6px;
+  color: var(--white-dim); font-family: var(--font-ui);
+  font-size: 0.85rem; font-weight: 700; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  transition: all 0.2s; position: relative; overflow: hidden;
+}
+.payment-method-btn .pm-icon { font-size: 1.6rem; }
+.payment-method-btn .pm-name { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
+.payment-method-btn .pm-detail { font-size: 0.7rem; color: var(--chrome-dim); font-weight: 500; }
+
+/* Cartão */
+.payment-method-btn[data-method="Cartão"]:hover {
+  border-color: #4466CC; color: #6699FF; background: #4466CC15;
+}
+.payment-method-btn[data-method="Cartão"].selected {
+  background: linear-gradient(135deg, #1A1A3E, #0D0D20);
+  border-color: #4466CC; color: #6699FF;
+  box-shadow: 0 0 16px #4466CC44;
+}
+.payment-method-btn[data-method="Cartão"].selected .pm-name { color: #6699FF; }
+
+/* Pix */
+.payment-method-btn[data-method="Pix"]:hover {
+  border-color: var(--pix); color: var(--pix); background: #00BDAE15;
+}
+.payment-method-btn[data-method="Pix"].selected {
+  background: linear-gradient(135deg, #001A18, #001210);
+  border-color: var(--pix); color: var(--pix);
+  box-shadow: 0 0 16px #00BDAE44;
+}
+.payment-method-btn[data-method="Pix"].selected .pm-name { color: var(--pix); }
+
+/* Dinheiro */
+.payment-method-btn[data-method="Dinheiro"]:hover {
+  border-color: #22AA44; color: #44CC66; background: #22AA4415;
+}
+.payment-method-btn[data-method="Dinheiro"].selected {
+  background: linear-gradient(135deg, #001A08, #001005);
+  border-color: #22AA44; color: #44CC66;
+  box-shadow: 0 0 16px #22AA4444;
+}
+.payment-method-btn[data-method="Dinheiro"].selected .pm-name { color: #44CC66; }
+
+/* Card type (Débito/Crédito) */
+.card-type-info {
+  display: none;
+  background: #4466CC0D; border: 1px solid #4466CC33;
+  border-radius: 6px; padding: 14px 16px; margin-bottom: 16px;
+}
+.card-type-info.visible { display: block; }
+.card-type-label {
+  font-family: var(--font-tech); font-size: 0.5rem;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: #6699FF; margin-bottom: 10px;
+}
+.card-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.card-type-btn {
+  padding: 10px 8px; background: #0D0D0D; border: 1px solid #4466CC33;
+  border-radius: 4px; color: var(--white-dim); font-family: var(--font-ui);
+  font-size: 0.85rem; font-weight: 700; text-align: center; transition: all 0.2s;
+}
+.card-type-btn:hover { border-color: #4466CC; color: #6699FF; background: #4466CC15; }
+.card-type-btn.selected {
+  background: linear-gradient(135deg, #1A1A3E, #0D0D20);
+  border-color: #4466CC; color: #6699FF; box-shadow: 0 0 12px #4466CC44;
+}
+.card-credit-note {
+  display: none;
+  align-items: flex-start; gap: 8px;
+  margin-top: 12px; padding: 10px 12px;
+  background: #FFB80012; border: 1px solid #FFB80044; border-radius: 4px;
+  font-family: var(--font-ui); font-size: 0.78rem; color: var(--gold);
+  line-height: 1.4;
+}
+.card-credit-note.visible { display: flex; }
+
+/* Pix key info */
+.pix-key-info {
+  display: none;
+  background: #00BDAE10; border: 1px solid #00BDAE33;
+  border-radius: 6px; padding: 14px 16px; margin-bottom: 16px;
+}
+.pix-key-info.visible { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.pix-key-icon { font-size: 1.2rem; }
+.pix-key-text { flex: 1; }
+.pix-key-label { font-family: var(--font-tech); font-size: 0.5rem; letter-spacing: 3px; color: var(--pix); text-transform: uppercase; }
+.pix-key-value { font-family: var(--font-ui); font-size: 1rem; font-weight: 700; color: var(--white); letter-spacing: 1px; }
+.pix-copy-btn {
+  padding: 8px 14px; background: #00BDAE22; border: 1px solid #00BDAE55;
+  border-radius: 4px; color: var(--pix); font-family: var(--font-ui);
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; transition: all 0.2s;
+}
+.pix-copy-btn:hover { background: #00BDAE33; box-shadow: 0 0 10px #00BDAE33; }
+.pix-copy-btn.copied { background: #00BDAE44; color: #00FFCC; }
+
+/* ============================================
+   AVISO DE NÃO REEMBOLSO — NOVO
+============================================ */
+.refund-warning {
+  background: linear-gradient(145deg, #1A0500, #120300);
+  border: 1px solid #FF440033;
+  border-left: 3px solid #FF4400;
+  border-radius: 0 6px 6px 0;
+  padding: 16px 18px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.refund-warning::before {
+  content: '⚠';
+  position: absolute;
+  right: 16px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  opacity: 0.06;
+  line-height: 1;
+}
+.refund-warning-title {
+  font-family: var(--font-tech); font-size: 0.58rem;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: #FF6600; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.refund-warning-icon { font-size: 0.9rem; }
+.refund-warning-text {
+  font-family: var(--font-ui); font-size: 0.9rem;
+  color: var(--chrome-dim); line-height: 1.6;
+}
+.refund-warning-text strong { color: var(--chrome); }
+.refund-highlight {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #FF440015; border: 1px solid #FF440033;
+  border-radius: 3px; padding: 2px 8px;
+  color: #FF7744; font-weight: 700; font-size: 0.85rem;
+}
+
+/* ============================================
+   SCHEDULE SUMMARY
+============================================ */
+.schedule-summary {
+  background: #CC000010; border: 1px solid #CC000033;
+  border-radius: 6px; padding: 16px 20px; margin-bottom: 24px;
+  font-family: var(--font-ui); font-size: 0.95rem;
+  color: var(--chrome-dim); display: none; line-height: 1.8;
+}
+.schedule-summary strong { color: var(--white); }
+.schedule-summary.visible { display: block; }
+
+/* ============================================
+   WHATSAPP BUTTON
+============================================ */
+.btn-whatsapp {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  width: 100%; padding: 18px 24px;
+  background: linear-gradient(135deg, #128C7E, #075E54);
+  border: 1px solid #25D366; border-radius: 4px; color: var(--white);
+  font-family: var(--font-ui); font-size: 1.1rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  transition: all var(--transition); box-shadow: 0 4px 20px #128C7E44;
+}
+.btn-whatsapp:hover {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  box-shadow: 0 6px 30px #25D36688; transform: translateY(-2px);
+}
+.wha-icon { font-size: 1.3rem; }
+
+/* ============================================
+   TRUST BAR
+============================================ */
+.trust-bar {
+  background: linear-gradient(90deg, #0D0000, #111111, #0D0000);
+  border-top: 1px solid #CC000033; border-bottom: 1px solid #CC000033;
+  padding: 28px 24px; display: flex; justify-content: center;
+  gap: 0; flex-wrap: wrap; overflow: hidden; position: relative;
+}
+.trust-bar::before {
+  content: 'NELTON MOTOS · NELTON MOTOS · NELTON MOTOS · NELTON MOTOS · NELTON MOTOS · NELTON MOTOS · ';
+  position: absolute; inset: 0; display: flex; align-items: center;
+  font-family: var(--font-display); font-size: 1.8rem; color: #CC000008;
+  letter-spacing: 6px; white-space: nowrap; overflow: hidden;
+  animation: marquee 20s linear infinite; pointer-events: none;
+}
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.trust-item {
+  display: flex; align-items: center; gap: 10px; padding: 8px 28px;
+  border-right: 1px solid #CC000022; position: relative; z-index: 1;
+}
+.trust-item:last-child { border-right: none; }
+.trust-icon { font-size: 1.3rem; }
+.trust-text { font-family: var(--font-tech); font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase; color: var(--chrome-dim); }
+
+/* ============================================
+   CLOSING SECTION
+============================================ */
+.closing-section {
+  position: relative; padding: 100px 24px; text-align: center;
+  overflow: hidden; background: linear-gradient(180deg, transparent, #0D0000 50%, #000000);
+}
+.closing-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 100%, #8B000033 0%, transparent 65%);
+}
+.closing-watermark {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: clamp(6rem, 20vw, 16rem);
+  color: #CC000006; letter-spacing: 20px; pointer-events: none;
+  user-select: none; white-space: nowrap;
+}
+.closing-inner { position: relative; z-index: 2; }
+
+.flame-row {
+  font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 24px;
+  animation: flame-flicker 1.5s ease-in-out infinite alternate;
+}
+@keyframes flame-flicker {
+  from { filter: drop-shadow(0 0 10px #FF4400) brightness(1); transform: scale(1); }
+  to   { filter: drop-shadow(0 0 24px #FF6600) brightness(1.2); transform: scale(1.04); }
+}
+.closing-pre { font-family: var(--font-tech); font-size: 0.6rem; letter-spacing: 8px; color: var(--red); text-transform: uppercase; margin-bottom: 16px; }
+.closing-title {
+  font-family: var(--font-display); font-size: clamp(2.5rem, 8vw, 6rem);
+  letter-spacing: 6px; color: var(--white);
+  text-shadow: 0 0 40px #CC000077, 0 0 80px #CC000033;
+  margin-bottom: 16px; line-height: 0.9;
+}
+.closing-title span { color: var(--red-hot); }
+.closing-sub {
+  font-family: var(--font-ui); font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--chrome-dim); letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 48px; font-weight: 500;
+}
+.gear-row { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 48px; }
+.gear { font-size: 2rem; animation: spin-slow 8s linear infinite; color: var(--red); text-shadow: 0 0 12px var(--red); }
+.gear:nth-child(2) { font-size: 1.4rem; animation-direction: reverse; animation-duration: 5s; color: var(--chrome-dim); }
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.gear-line { flex: 1; max-width: 120px; height: 1px; background: linear-gradient(90deg, transparent, #CC000055); }
+.gear-line:last-child { background: linear-gradient(90deg, #CC000055, transparent); }
+
+.closing-btns { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 48px; }
+.btn-back {
+  display: flex; align-items: center; gap: 10px; padding: 16px 36px;
+  background: transparent; border: 1px solid #CC000066; border-radius: 4px;
+  color: var(--white-dim); font-family: var(--font-ui); font-size: 1rem;
+  font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  transition: all var(--transition);
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+}
+.btn-back:hover { border-color: var(--red); color: var(--white); background: #CC000015; box-shadow: 0 0 20px #CC000033; }
+
+.btn-wha-main {
+  display: flex; align-items: center; gap: 12px; padding: 16px 36px;
+  background: linear-gradient(135deg, #128C7E, #075E54); border: 1px solid #25D366;
+  border-radius: 4px; color: var(--white); font-family: var(--font-ui);
+  font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  transition: all var(--transition);
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  box-shadow: 0 4px 20px #128C7E44;
+}
+.btn-wha-main:hover { background: linear-gradient(135deg, #25D366, #128C7E); box-shadow: 0 6px 30px #25D36666; transform: translateY(-2px); }
+
+.contact-strip {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 32px;
+  padding: 32px 24px; border-top: 1px solid #CC000022; margin-top: 20px;
+}
+.contact-item { display: flex; align-items: center; gap: 10px; font-family: var(--font-ui); font-size: 0.9rem; color: var(--chrome-dim); font-weight: 600; letter-spacing: 1px; }
+.contact-item .ci { font-size: 1rem; }
+
+.rev-footer { padding: 24px; text-align: center; border-top: 1px solid #CC000022; font-family: var(--font-tech); font-size: 0.55rem; letter-spacing: 3px; color: var(--chrome-dim); text-transform: uppercase; }
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+@media (max-width: 480px) {
+  .form-row { grid-template-columns: 1fr; }
+  .bike-types { grid-template-columns: 1fr 1fr 1fr; }
+  .payment-methods-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .trust-item { padding: 8px 14px; }
+  .modal-body { padding: 20px; }
+  .modal-header { padding: 24px 20px 16px; }
+}
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+/* ============================================
+   ÁREA DE MANUTENÇÃO — FAB (Floating Action Button)
+============================================ */
+.maint-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 28px;
+  z-index: 500;
+  width: 66px; height: 66px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 35% 30%, #2A0000, #0A0000 70%);
+  border: 1px solid #CC000066;
+  box-shadow: 0 0 0 1px #FF000018, 0 8px 24px #000000AA, 0 0 26px #CC000044;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.maint-fab::before {
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 1px solid #CC000033;
+  animation: fab-ring 3.2s ease-in-out infinite;
+}
+@keyframes fab-ring {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50%      { transform: scale(1.12); opacity: 0; }
+}
+.maint-fab:hover {
+  transform: translateY(-3px);
+  border-color: var(--red);
+  box-shadow: 0 0 0 1px #FF00002E, 0 12px 30px #000000CC, 0 0 40px #CC000066;
+}
+.maint-fab svg { width: 30px; height: 30px; filter: drop-shadow(0 0 6px #CC0000AA); }
+.maint-fab.bump { animation: fab-bump 0.45s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes fab-bump { 0% { transform: scale(1); } 40% { transform: scale(1.22) rotate(-8deg); } 100% { transform: scale(1) rotate(0); } }
+
+.maint-badge {
+  position: absolute;
+  top: -6px; right: -6px;
+  min-width: 24px; height: 24px; padding: 0 6px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--red-hot), var(--wine-deep));
+  border: 2px solid var(--black);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-tech); font-size: 0.72rem; font-weight: 700;
+  color: var(--white);
+  box-shadow: 0 0 12px #FF0000AA;
+  transform: scale(0);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.maint-badge.show { transform: scale(1); }
+
+.maint-fab-label {
+  position: absolute;
+  right: 78px; bottom: 20px;
+  background: var(--black-card);
+  border: 1px solid #CC000044;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-family: var(--font-tech); font-size: 0.55rem;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--chrome);
+  white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transform: translateX(6px);
+  transition: all var(--transition);
+  clip-path: polygon(8px 0, 100% 0, 100% 100%, 0 100%, 0 8px);
+}
+.maint-fab:hover .maint-fab-label { opacity: 1; transform: translateX(0); }
+
+/* ============================================
+   ÁREA DE MANUTENÇÃO — DRAWER
+============================================ */
+.maint-overlay {
+  position: fixed; inset: 0;
+  background: #000000B0;
+  backdrop-filter: blur(3px);
+  z-index: 600;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--transition);
+}
+.maint-overlay.open { opacity: 1; pointer-events: auto; }
+
+.maint-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(430px, 100vw);
+  background: linear-gradient(165deg, #0C0000 0%, #060000 60%, #000000 100%);
+  border-left: 1px solid #CC000044;
+  box-shadow: -20px 0 60px #000000CC;
+  z-index: 601;
+  display: flex; flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+.maint-drawer.open { transform: translateX(0); }
+
+.maint-drawer-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 26px 24px 20px;
+  border-bottom: 1px solid #CC000033;
+  background:
+    radial-gradient(ellipse 120% 100% at 0% 0%, #CC000018, transparent 60%);
+  position: relative;
+}
+.maint-drawer-header::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: linear-gradient(90deg, var(--red), transparent 70%);
+}
+.maint-drawer-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: #CC000015; border: 1px solid #CC000055;
+  flex-shrink: 0;
+}
+.maint-drawer-icon svg { width: 22px; height: 22px; filter: drop-shadow(0 0 4px #CC0000AA); }
+.maint-drawer-titles { flex: 1; }
+.maint-drawer-eyebrow {
+  font-family: var(--font-tech); font-size: 0.55rem; letter-spacing: 4px;
+  color: var(--red); text-transform: uppercase; margin-bottom: 4px;
+}
+.maint-drawer-title { font-family: var(--font-display); font-size: 1.7rem; letter-spacing: 2px; color: var(--white); line-height: 1; }
+.maint-drawer-close {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid #CC000044; color: var(--chrome-dim);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; transition: all var(--transition); flex-shrink: 0;
+}
+.maint-drawer-close:hover { background: #CC000022; color: var(--white); border-color: var(--red); transform: rotate(90deg); }
+
+.maint-drawer-body { flex: 1; overflow-y: auto; padding: 20px 24px; }
+.maint-drawer-body::-webkit-scrollbar { width: 5px; }
+.maint-drawer-body::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+.maint-empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 60px 20px; gap: 16px; color: var(--chrome-dim);
+}
+.maint-empty svg { width: 56px; height: 56px; opacity: 0.25; }
+.maint-empty-title { font-family: var(--font-ui); font-size: 1.05rem; font-weight: 700; color: var(--chrome); }
+.maint-empty-text { font-family: var(--font-ui); font-size: 0.85rem; line-height: 1.6; max-width: 260px; }
+
+.maint-item {
+  position: relative;
+  background: linear-gradient(150deg, #130202, #0A0000);
+  border: 1px solid #CC000033;
+  border-left: 3px solid var(--red);
+  border-radius: 0 8px 8px 0;
+  padding: 18px 18px 16px;
+  margin-bottom: 14px;
+  animation: maint-item-in 0.4s cubic-bezier(0.16,1,0.3,1) both;
+  overflow: hidden;
+}
+.maint-item::before {
+  content: '';
+  position: absolute; right: -20px; top: -20px;
+  width: 90px; height: 90px;
+  background: radial-gradient(circle, #CC000022, transparent 70%);
+  pointer-events: none;
+}
+@keyframes maint-item-in {
+  from { opacity: 0; transform: translateX(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+.maint-item-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.maint-item-tag {
+  font-family: var(--font-tech); font-size: 0.5rem; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--red-hot); margin-bottom: 6px;
+  display: flex; align-items: center; gap: 6px;
+}
+.maint-item-tag::before { content: '●'; font-size: 0.5rem; animation: pulse-dot 1.6s ease-in-out infinite; }
+@keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.maint-item-name { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 1px; color: var(--white); line-height: 1.1; }
+.maint-item-remove {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  border: 1px solid #CC000044; color: var(--chrome-dim);
+  display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+  transition: all var(--transition);
+}
+.maint-item-remove:hover { background: var(--red); color: var(--white); border-color: var(--red); }
+.maint-item-prices { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.maint-item-price-pill {
+  font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600;
+  color: var(--chrome); background: #FFFFFF08; border: 1px solid #FFFFFF14;
+  border-radius: 20px; padding: 4px 11px; display: flex; align-items: center; gap: 5px;
+}
+.maint-item-price-pill b { color: var(--gold); font-weight: 700; }
+.maint-item-sinal-note {
+  font-family: var(--font-ui); font-size: 0.72rem; font-weight: 600;
+  color: var(--gold); background: #FFB80012; border: 1px solid #FFB80033;
+  border-radius: 8px; padding: 7px 10px; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 6px;
+}
+.maint-item-actions { display: flex; gap: 10px; }
+.maint-item-schedule {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 11px 14px; background: linear-gradient(135deg, var(--red), var(--wine));
+  border: 1px solid #FF000055; border-radius: 4px; color: var(--white);
+  font-family: var(--font-ui); font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  transition: all var(--transition);
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+.maint-item-schedule:hover { box-shadow: 0 4px 18px #CC000066; transform: translateY(-1px); }
+
+.maint-drawer-footer {
+  padding: 18px 24px 24px; border-top: 1px solid #CC000033;
+}
+.maint-footer-note {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-family: var(--font-ui); font-size: 0.75rem; line-height: 1.6;
+  color: var(--chrome-dim); margin-bottom: 4px;
+}
+.maint-footer-note svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; opacity: 0.7; }
+
+/* Toast de confirmação */
+.maint-toast {
+  position: fixed; right: 24px; bottom: 106px; z-index: 650;
+  display: flex; align-items: center; gap: 12px;
+  background: linear-gradient(135deg, #150000, #0A0000);
+  border: 1px solid var(--red); border-radius: 6px;
+  padding: 14px 18px; max-width: 300px;
+  box-shadow: 0 10px 30px #000000CC, 0 0 24px #CC000044;
+  transform: translateY(12px) scale(0.95); opacity: 0; pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.maint-toast.show { transform: translateY(0) scale(1); opacity: 1; }
+.maint-toast-icon { font-size: 1.2rem; flex-shrink: 0; }
+.maint-toast-text { font-family: var(--font-ui); font-size: 0.82rem; color: var(--chrome); line-height: 1.4; }
+.maint-toast-text strong { color: var(--white); }
+
+@media (max-width: 480px) {
+  .maint-fab { right: 16px; bottom: 20px; width: 58px; height: 58px; }
+  .maint-fab svg { width: 26px; height: 26px; }
+  .maint-toast { right: 16px; left: 16px; max-width: none; bottom: 92px; }
+  .maint-drawer { width: 100vw; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SCHEDULING MODAL ===== -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalPlanName">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-plan-name" id="modalPlanName">REVISÃO BÁSICA</div>
+        <div class="modal-subtitle">Agendar Serviço · Nelton Motos</div>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Fechar">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- Tipo de moto -->
+      <div class="form-group">
+        <label class="form-label">Tipo da sua Moto</label>
+        <div class="bike-types" id="bikeTypes">
+          <button class="bike-type-btn" data-bike="Moto Pequena" data-price-idx="0">
+            <span class="bicon">🛵</span>Pequena
+            <span class="bcc">50cc até 150cc</span>
+          </button>
+          <button class="bike-type-btn" data-bike="Moto Média" data-price-idx="1">
+            <span class="bicon">🏍️</span>Média
+            <span class="bcc">160cc até 190cc</span>
+          </button>
+          <button class="bike-type-btn" data-bike="Moto Grande" data-price-idx="2">
+            <span class="bicon">🏎️</span>Grande
+            <span class="bcc">200cc até 600cc</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mês -->
+      <div class="form-group">
+        <label class="form-label">Mês</label>
+        <div class="date-info">
+          <span>Data atual:</span>
+          <span class="date-badge" id="currentDateBadge">—</span>
+        </div>
+        <div class="select-wrap">
+          <select class="form-select" id="schedMonth">
+            <option value="">Selecione o mês...</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Dia -->
+      <div class="form-group">
+        <label class="form-label">Dia</label>
+        <div class="select-wrap">
+          <select class="form-select" id="schedDay">
+            <option value="">Selecione o dia...</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Horário -->
+      <div class="form-group">
+        <label class="form-label">Horário Preferido</label>
+        <div class="time-slots" id="timeSlots">
+          <button class="time-slot" data-time="08:00" data-hour="8">08:00</button>
+          <button class="time-slot" data-time="09:00" data-hour="9">09:00</button>
+          <button class="time-slot" data-time="10:00" data-hour="10">10:00</button>
+          <button class="time-slot" data-time="11:00" data-hour="11">11:00</button>
+          <button class="time-slot" data-time="13:00" data-hour="13">13:00</button>
+          <button class="time-slot late-slot" data-time="14:00" data-hour="14">14:00</button>
+          <button class="time-slot late-slot" data-time="15:00" data-hour="15">15:00</button>
+          <button class="time-slot late-slot" data-time="16:00" data-hour="16">16:00</button>
+          <button class="time-slot late-slot" data-time="17:00" data-hour="17">17:00</button>
+          <button class="time-slot late-slot" data-time="18:00" data-hour="18">18:00</button>
+        </div>
+        <div class="sched-warning">
+          <span class="sw-icon">⚠️</span>
+          <span class="sw-text">Agendamentos a partir das <b>14h</b> têm entrega apenas no <b>dia seguinte</b>. Horários com 🌙 indicam essa condição.</span>
+        </div>
+      </div>
+
+      <!-- Nome -->
+      <div class="form-group">
+        <label class="form-label" for="schedName">Seu Nome</label>
+        <input type="text" class="form-input" id="schedName" placeholder="Ex: João Silva">
+      </div>
+
+      <!-- ===== PAGAMENTO DO SINAL ===== -->
+      <div class="payment-section">
+        <div class="payment-header">
+          <span class="payment-header-icon">💳</span>
+          <div class="payment-header-text">
+            <div class="payment-header-title">SINAL DE RESERVA</div>
+            <div class="payment-header-sub">50% do valor antecipado · obrigatório para confirmar</div>
+          </div>
+        </div>
+
+        <!-- Valor do sinal dinâmico -->
+        <div class="sinal-display">
+          <div class="sinal-display-left">
+            <div style="font-size:0.6rem;margin-bottom:4px;">Total do serviço</div>
+            <div id="totalValue" style="font-family:var(--font-display);font-size:1.1rem;color:var(--chrome-dim);">—</div>
+          </div>
+          <div class="sinal-display-right">
+            <div>
+              <div class="sinal-label">Valor do sinal (50%)</div>
+              <div class="sinal-value hidden" id="sinalValue">Selecione a moto</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Forma de pagamento -->
+        <div class="payment-methods-label">Forma de Pagamento do Sinal</div>
+        <div class="payment-methods-grid" id="paymentMethods">
+          <button class="payment-method-btn" data-method="Cartão">
+            <span class="pm-icon">💳</span>
+            <span class="pm-name">Cartão</span>
+            <span class="pm-detail">Crédito/Débito</span>
+          </button>
+          <button class="payment-method-btn" data-method="Pix">
+            <span class="pm-icon">⚡</span>
+            <span class="pm-name">Pix</span>
+            <span class="pm-detail">Instantâneo</span>
+          </button>
+          <button class="payment-method-btn" data-method="Dinheiro">
+            <span class="pm-icon">💵</span>
+            <span class="pm-name">Dinheiro</span>
+            <span class="pm-detail">Na chegada</span>
+          </button>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Débito ou Crédito (aparece só quando Cartão selecionado) -->
+        <div class="card-type-info" id="cardTypeInfo">
+          <div class="card-type-label">Débito ou Crédito?</div>
+          <div class="card-type-grid" id="cardTypeGrid">
+            <button class="card-type-btn" data-cardtype="Débito">💳 Débito</button>
+            <button class="card-type-btn" data-cardtype="Crédito">💳 Crédito</button>
+          </div>
+          <div class="card-credit-note" id="cardCreditNote">
+            <span>⚠️</span>
+            <span><strong>Observação:</strong> Acréscimo da máquina — pagamentos no crédito têm um acréscimo referente à taxa da maquininha.</span>
+          </div>
+        </div>
+
+        <!-- Chave Pix (aparece só quando Pix selecionado) -->
+        <div class="pix-key-info" id="pixKeyInfo">
+          <span class="pix-key-icon">⚡</span>
+          <div class="pix-key-text">
+            <div class="pix-key-label">Chave Pix — Telefone</div>
+            <div class="pix-key-value" id="pixKeyValue">(85) 99673-9891</div>
+          </div>
+          <button class="pix-copy-btn" id="pixCopyBtn">COPIAR</button>
+        </div>
+
+      </div>
+      <!-- FIM PAGAMENTO -->
+
+
+
+
+
+
+
+
+
+      <!-- ===== AVISO NÃO REEMBOLSO ===== -->
+      <div class="refund-warning">
+        <div class="refund-warning-title">
+          <span class="refund-warning-icon">⚠️</span>
+          Política de Reserva — Leia com atenção
+        </div>
+        <div class="refund-warning-text">
+          O sinal de reserva de <span class="refund-highlight">50%</span> <strong>não é reembolsável</strong> em caso de desistência do serviço.
+          Caso não possa comparecer, <strong>não se preocupe!</strong> Podemos <strong>reagendar para um novo dia</strong> sem nenhuma cobrança adicional. 
+          Entre em contato pelo WhatsApp para remarcar com antecedência mínima de <strong>24 horas</strong>.
+        </div>
+      </div>
+
+      <!-- Resumo do agendamento -->
+      <div class="schedule-summary" id="scheduleSummary"></div>
+
+      <!-- Botão WhatsApp -->
+      <button class="btn-whatsapp" id="btnWhatsApp">
+        <span class="wha-icon">📱</span>
+        CONFIRMAR AGENDAMENTO NO WHATSAPP
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== ÁREA DE MANUTENÇÃO — FAB ===== -->
+<button class="maint-fab" id="maintFab" aria-label="Abrir área de manutenção">
+  <span class="maint-fab-label">Área de Manutenção</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--red-hot)">
+    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span class="maint-badge" id="maintBadge">0</span>
+</button>
+
+<!-- ===== ÁREA DE MANUTENÇÃO — DRAWER ===== -->
+<div class="maint-overlay" id="maintOverlay"></div>
+<aside class="maint-drawer" id="maintDrawer" role="dialog" aria-modal="true" aria-labelledby="maintDrawerTitle">
+  <div class="maint-drawer-header">
+    <div class="maint-drawer-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--red-hot)">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="maint-drawer-titles">
+      <div class="maint-drawer-eyebrow">Nelton Motos · Ordem de Serviço</div>
+      <div class="maint-drawer-title" id="maintDrawerTitle">MANUTENÇÃO</div>
+    </div>
+    <button class="maint-drawer-close" id="maintDrawerClose" aria-label="Fechar">✕</button>
+  </div>
+
+  <div class="maint-drawer-body" id="maintDrawerBody">
+    <!-- preenchido via JS -->
+  </div>
+
+  <div class="maint-drawer-footer">
+    <div class="maint-footer-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-width="1.6"/><path d="M12 8v5M12 16h.01" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span>Selecione uma revisão e clique em <strong style="color:var(--chrome)">Agendar Agora</strong> para preencher automaticamente seu agendamento.</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Toast de confirmação -->
+<div class="maint-toast" id="maintToast">
+  <span class="maint-toast-icon">🔧</span>
+  <span class="maint-toast-text" id="maintToastText"></span>
+</div>
+
+<!-- ===== HERO ENTRANCE ===== -->
+<div class="hero-entrance">
+  <div class="hero-bg"></div>
+  <div class="hero-scan"></div>
+  <div class="slash-deco"></div>
+  <div class="slash-deco"></div>
+  <div class="slash-deco"></div>
+  <div class="hero-inner">
+    <span class="hero-glyph">🔧</span>
+    <div class="hero-eyebrow">Nelton Motos · Fortaleza-CE</div>
+    <h1 class="hero-title">CATÁLOGO DE<br><span>REVISÕES</span></h1>
+    <p class="hero-desc">Serviço técnico especializado para sua moto. Escolha o plano ideal e agende sua revisão com profissionais que entendem do assunto.</p>
+  </div>
+  <div class="scroll-indicator">role para ver</div>
+</div>
+
+<!-- ===== TRUST BAR ===== -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-icon">🏆</span><span class="trust-text">Qualidade Garantida</span></div>
+  <div class="trust-item"><span class="trust-icon">⚡</span><span class="trust-text">Atendimento Ágil</span></div>
+  <div class="trust-item"><span class="trust-icon">🛡️</span><span class="trust-text">Serviço Profissional</span></div>
+  <div class="trust-item"><span class="trust-icon">💎</span><span class="trust-text">Compromisso Total</span></div>
+</div>
+
+<!-- ===== PLANS SECTION ===== -->
+<section class="plans-section reveal">
+  <div class="section-header">
+    <p class="section-eyebrow">Escolha seu plano</p>
+    <h2 class="section-title">PACOTES DE <span style="color:var(--red-hot)">REVISÃO</span></h2>
+    <div class="section-divider"><div class="divider-diamond"></div></div>
+  </div>
+
+  <div class="plan-tabs" role="tablist">
+    <button class="plan-tab active" data-panel="basic" role="tab" aria-selected="true">
+      <span class="tab-check">✓</span>
+      <span class="tab-icon">🔩</span>
+      <span class="tab-name">Básica</span>
+      <span class="tab-price">A partir de <b>R$80</b></span>
+    </button>
+    <button class="plan-tab" data-panel="padrao" role="tab" aria-selected="false">
+      <span class="tab-check">✓</span>
+      <span class="tab-icon">⚙️</span>
+      <span class="tab-name">Padrão</span>
+      <span class="tab-price">A partir de <b>R$140</b></span>
+    </button>
+    <button class="plan-tab" data-panel="premium" role="tab" aria-selected="false">
+      <span class="tab-check">✓</span>
+      <span class="tab-icon">💎</span>
+      <span class="tab-name">Premium</span>
+      <span class="tab-price">A partir de <b>R$160</b></span>
+    </button>
+  </div>
+
+  <!-- BÁSICA -->
+  <div class="plan-panel active" id="panel-basic">
+    <div class="plan-card">
+      <div class="plan-header">
+        <div class="plan-header-bg"></div>
+        <div class="plan-badge badge-basic">🔩 Plano 01</div>
+        <div class="plan-name" style="color:#6699FF;">REVISÃO BÁSICA</div>
+        <div class="plan-slogan">"Qualidade que você sente, confiança que você merece!"</div>
+      </div>
+      <div class="plan-body">
+        <div>
+          <div class="plan-block-title">O que inclui</div>
+          <ul class="service-list">
+            <li>Troca do óleo da bengala</li>
+            <li>Lubrificação de peças</li>
+          </ul>
+        </div>
+        <div>
+          <div class="plan-block-title">Valores</div>
+          <table class="price-table">
+            <thead><tr><th>Tipo</th><th>Preço</th></tr></thead>
+            <tbody>
+              <tr><td>Moto Pequena<span class="cc-tag">50cc até 150cc</span></td><td>R$80</td></tr>
+              <tr><td>Moto Média<span class="cc-tag">160cc até 190cc</span></td><td>R$100</td></tr>
+              <tr><td>Moto Grande<span class="cc-tag">200cc até 600cc</span></td><td>R$200</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="benefits-list">
+          <li><span class="bicon">🏆</span> Serviço profissional</li>
+          <li><span class="bicon">✅</span> Qualidade garantida</li>
+          <li><span class="bicon">⚡</span> Agilidade no atendimento</li>
+          <li><span class="bicon">🤝</span> Compromisso com você</li>
+        </ul>
+        <blockquote class="plan-quote">"Qualidade que você sente, confiança que você merece!"</blockquote>
+        <div class="plan-cta">
+          <button class="btn-schedule" data-plan="Revisão Básica" data-prices='["80","100","200"]'>🔧 ESCOLHER REVISÃO BÁSICA</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PADRÃO -->
+  <div class="plan-panel" id="panel-padrao">
+    <div class="plan-card">
+      <div class="plan-header">
+        <div class="plan-header-bg"></div>
+        <div class="plan-badge badge-padrao">⚙️ Plano 02</div>
+        <div class="plan-name" style="color:var(--gold);">REVISÃO PADRÃO</div>
+        <div class="plan-slogan">"Cuidado que sua moto merece, desempenho que você sente!"</div>
+      </div>
+      <div class="plan-body">
+        <div>
+          <div class="plan-block-title">O que inclui</div>
+          <ul class="service-list">
+            <li>Troca do óleo da bengala</li>
+            <li>Lubrificação de peças</li>
+            <li>Limpeza do chassi</li>
+            <li>Limpeza dos conectores</li>
+          </ul>
+        </div>
+        <div>
+          <div class="plan-block-title">Valores</div>
+          <table class="price-table">
+            <thead><tr><th>Tipo</th><th>Preço</th></tr></thead>
+            <tbody>
+              <tr><td>Moto Pequena<span class="cc-tag">50cc até 150cc</span></td><td>R$140</td></tr>
+              <tr><td>Moto Média<span class="cc-tag">160cc até 190cc</span></td><td>R$160</td></tr>
+              <tr><td>Moto Grande<span class="cc-tag">200cc até 600cc</span></td><td>R$300</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="benefits-list">
+          <li><span class="bicon">🛡️</span> Mais segurança e conforto</li>
+          <li><span class="bicon">🚀</span> Desempenho otimizado</li>
+          <li><span class="bicon">🔧</span> Peças bem cuidadas, moto sempre pronta</li>
+          <li><span class="bicon">⚡</span> Atendimento rápido e eficiente</li>
+          <li><span class="bicon">🏆</span> Profissionalismo e qualidade</li>
+          <li><span class="bicon">✅</span> Satisfação garantida</li>
+        </ul>
+        <blockquote class="plan-quote">"A revisão certa hoje, é economia e tranquilidade amanhã!"</blockquote>
+        <div class="plan-cta">
+          <button class="btn-schedule" data-plan="Revisão Padrão" data-prices='["140","160","300"]'>🔧 ESCOLHER REVISÃO PADRÃO</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREMIUM -->
+  <div class="plan-panel" id="panel-premium">
+    <div class="plan-card">
+      <div class="plan-header">
+        <div class="plan-header-bg"></div>
+        <div class="plan-badge badge-premium">💎 Plano 03</div>
+        <div class="plan-name" style="color:#ff0d0d;">REVISÃO PREMIUM</div>
+        <div class="plan-slogan">"Cuidado que sua moto merece, desempenho que você sente!"</div>
+      </div>
+
+
+      
+
+
+
+
+      <div class="plan-body">
+        <div>
+          <div class="plan-block-title">O que inclui</div>
+          <ul class="service-list">
+            <li>Troca do óleo da bengala</li>
+            <li>Lubrificação de peças</li>
+            <li>Limpeza do chassi</li>
+            <li>Limpeza dos conectores</li>
+            <li>Limpeza de injeção</li>
+            <li>Limpeza da moto completa</li>
+          </ul>
+        </div>
+
+
+
+
+
+
+
+        <div>
+          <div class="plan-block-title">Valores</div>
+          <table class="price-table">
+            <thead><tr><th>Tipo</th><th>Preço</th></tr></thead>
+            <tbody>
+              <tr><td>Moto Pequena<span class="cc-tag">50cc até 150cc</span></td><td>R$160</td></tr>
+              <tr><td>Moto Média<span class="cc-tag">160cc até 190cc</span></td><td>R$250</td></tr>
+              <tr><td>Moto Grande<span class="cc-tag">200cc até 600cc</span></td><td>R$500</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="benefits-list">
+          <li><span class="bicon">🛡️</span> Mais segurança e conforto</li>
+          <li><span class="bicon">🚀</span> Desempenho otimizado</li>
+          <li><span class="bicon">🔧</span> Peças bem cuidadas, moto sempre pronta</li>
+          <li><span class="bicon">⚡</span> Atendimento rápido e eficiente</li>
+          <li><span class="bicon">🏆</span> Profissionalismo e qualidade</li>
+          <li><span class="bicon">💎</span> Satisfação garantida · Moto impecável</li>
+        </ul>
+        <blockquote class="plan-quote">"Nelton Motos — Cuidando da sua moto com paixão e excelência!"</blockquote>
+        <div class="plan-cta">
+          <button class="btn-schedule" data-plan="Revisão Premium" data-prices='["160","250","500"]'>🔧 ESCOLHER REVISÃO PREMIUM</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PHOTO GALLERY ===== -->
+<section class="gallery-section reveal">
+  <div class="section-header">
+    <p class="section-eyebrow">Nosso Trabalho</p>
+    <h2 class="section-title">CONFIANÇA EM <span style="color:var(--red-hot)">CADA DETALHE</span></h2>
+    <div class="section-divider"><div class="divider-diamond"></div></div>
+  </div>
+  <div class="photo-grid">
+    <div class="photo-item tall">
+      <svg class="photo-svg" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <defs><radialGradient id="g1" cx="50%" cy="60%" r="60%"><stop offset="0%" stop-color="#1a0a00"/><stop offset="100%" stop-color="#050000"/></radialGradient></defs>
+        <rect width="400" height="600" fill="url(#g1)"/>
+        <rect x="0" y="460" width="400" height="140" fill="#0a0500"/>
+        <rect x="0" y="455" width="400" height="8" fill="#1a0800"/>
+        <rect x="80" y="260" width="240" height="180" rx="8" fill="#111" stroke="#333" stroke-width="1"/>
+        <rect x="100" y="280" width="200" height="20" rx="3" fill="#1a1a1a" stroke="#CC000033" stroke-width="1"/>
+        <rect x="100" y="308" width="200" height="20" rx="3" fill="#1a1a1a" stroke="#CC000033" stroke-width="1"/>
+        <rect x="100" y="336" width="200" height="20" rx="3" fill="#1a1a1a" stroke="#CC000033" stroke-width="1"/>
+        <ellipse cx="140" cy="260" rx="25" ry="12" fill="#222" stroke="#444" stroke-width="1"/>
+        <ellipse cx="200" cy="260" rx="25" ry="12" fill="#222" stroke="#444" stroke-width="1"/>
+        <ellipse cx="260" cy="260" rx="25" ry="12" fill="#222" stroke="#444" stroke-width="1"/>
+        <rect x="115" y="200" width="50" height="62" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+        <rect x="175" y="200" width="50" height="62" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+        <rect x="235" y="200" width="50" height="62" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+        <ellipse cx="200" cy="380" rx="80" ry="20" fill="#CC0000" opacity="0.15"/>
+        <circle cx="140" cy="210" r="4" fill="#FF4400" opacity="0.8"/>
+        <circle cx="200" cy="210" r="4" fill="#FF4400" opacity="0.8"/>
+        <circle cx="260" cy="210" r="4" fill="#FF4400" opacity="0.8"/>
+        <rect x="30" y="60" width="6" height="120" rx="3" fill="#333"/>
+        <rect x="50" y="80" width="6" height="100" rx="3" fill="#333"/>
+        <rect x="70" y="50" width="6" height="130" rx="3" fill="#333"/>
+        <rect x="310" y="70" width="6" height="110" rx="3" fill="#333"/>
+        <rect x="330" y="55" width="6" height="125" rx="3" fill="#333"/>
+        <polygon points="150,0 250,0 300,200 100,200" fill="#FFCC00" opacity="0.03"/>
+        <text x="200" y="550" text-anchor="middle" font-family="Arial Black" font-size="14" fill="#CC0000" opacity="0.6" letter-spacing="4">NELTON MOTOS</text>
+        <text x="200" y="570" text-anchor="middle" font-family="Arial" font-size="10" fill="#888" letter-spacing="2">MECÂNICA ESPECIALIZADA</text>
+      </svg>
+      <span class="photo-label">Motor · Revisão</span>
+    </div>
+    <div class="photo-item">
+      <svg class="photo-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0a0500"/><stop offset="100%" stop-color="#020202"/></linearGradient></defs>
+        <rect width="400" height="300" fill="url(#g2)"/>
+        <circle cx="200" cy="160" r="110" fill="none" stroke="#222" stroke-width="18"/>
+        <circle cx="200" cy="160" r="110" fill="none" stroke="#CC0000" stroke-width="2" stroke-dasharray="10 8" opacity="0.5"/>
+        <circle cx="200" cy="160" r="80" fill="none" stroke="#1a1a1a" stroke-width="12"/>
+        <line x1="200" y1="50" x2="200" y2="270" stroke="#333" stroke-width="3"/>
+        <line x1="90" y1="160" x2="310" y2="160" stroke="#333" stroke-width="3"/>
+        <line x1="122" y1="82" x2="278" y2="238" stroke="#333" stroke-width="3"/>
+        <line x1="278" y1="82" x2="122" y2="238" stroke="#333" stroke-width="3"/>
+        <circle cx="200" cy="160" r="22" fill="#1a1a1a" stroke="#CC000055" stroke-width="2"/>
+        <circle cx="200" cy="160" r="10" fill="#CC0000" opacity="0.8"/>
+        <circle cx="200" cy="160" r="112" fill="none" stroke="#CC000033" stroke-width="6"/>
+        <text x="200" y="295" text-anchor="middle" font-family="Arial" font-size="9" fill="#555" letter-spacing="2">LUBRIFICAÇÃO · MANUTENÇÃO</text>
+      </svg>
+      <span class="photo-label">Pneu · Roda</span>
+    </div>
+    <div class="photo-item">
+      <svg class="photo-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="300" fill="#050505"/>
+        <rect x="60" y="80" width="280" height="160" rx="10" fill="#0d0d0d" stroke="#222" stroke-width="2"/>
+        <rect x="80" y="100" width="240" height="30" rx="4" fill="#161616" stroke="#CC000022" stroke-width="1"/>
+        <rect x="80" y="138" width="240" height="30" rx="4" fill="#161616" stroke="#CC000022" stroke-width="1"/>
+        <rect x="80" y="176" width="240" height="30" rx="4" fill="#161616" stroke="#CC000022" stroke-width="1"/>
+        <line x1="200" y1="240" x2="200" y2="270" stroke="#CC8800" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+        <ellipse cx="200" cy="272" rx="6" ry="3" fill="#CC8800" opacity="0.7"/>
+        <rect x="290" y="100" width="50" height="80" rx="6" fill="#1a1a1a" stroke="#444" stroke-width="1"/>
+        <text x="315" y="148" text-anchor="middle" font-family="Arial" font-size="8" fill="#CC8800" font-weight="bold">OIL</text>
+        <text x="80" y="145" font-size="28" fill="#CC000077">🔧</text>
+        <text x="200" y="292" text-anchor="middle" font-family="Arial" font-size="9" fill="#555" letter-spacing="2">TROCA DE ÓLEO · BENGALA</text>
+      </svg>
+      <span class="photo-label">Óleo · Bengala</span>
+    </div>
+    <div class="photo-item">
+      <svg class="photo-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="300" fill="#060404"/>
+        <rect x="50" y="60" width="300" height="180" rx="12" fill="#0d0805" stroke="#331100" stroke-width="1"/>
+        <rect x="100" y="90" width="200" height="40" rx="6" fill="#111" stroke="#CC440022" stroke-width="1"/>
+        <rect x="130" y="110" width="20" height="60" rx="4" fill="#1a0800" stroke="#CC4400" stroke-width="1"/>
+        <rect x="190" y="110" width="20" height="60" rx="4" fill="#1a0800" stroke="#CC4400" stroke-width="1"/>
+        <rect x="250" y="110" width="20" height="60" rx="4" fill="#1a0800" stroke="#CC4400" stroke-width="1"/>
+        <line x1="140" y1="170" x2="130" y2="200" stroke="#3399FF" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+        <line x1="140" y1="170" x2="150" y2="200" stroke="#3399FF" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+        <line x1="200" y1="170" x2="190" y2="200" stroke="#3399FF" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+        <line x1="200" y1="170" x2="210" y2="200" stroke="#3399FF" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+        <line x1="260" y1="170" x2="250" y2="200" stroke="#3399FF" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+        <line x1="260" y1="170" x2="270" y2="200" stroke="#3399FF" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+        <text x="200" y="238" text-anchor="middle" font-family="Arial" font-size="10" fill="#CC4400" letter-spacing="2" font-weight="bold">INJEÇÃO</text>
+        <text x="200" y="292" text-anchor="middle" font-family="Arial" font-size="9" fill="#555" letter-spacing="2">LIMPEZA DE INJEÇÃO</text>
+      </svg>
+      <span class="photo-label">Injeção · Limpeza</span>
+    </div>
+    <div class="photo-item">
+      <svg class="photo-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="300" fill="#030306"/>
+        <rect x="60" y="80" width="120" height="80" rx="6" fill="#0a0a14" stroke="#334" stroke-width="1"/>
+        <rect x="80" y="100" width="80" height="10" rx="2" fill="#1a1a2e" stroke="#4466CC44" stroke-width="1"/>
+        <rect x="80" y="118" width="80" height="10" rx="2" fill="#1a1a2e" stroke="#4466CC44" stroke-width="1"/>
+        <rect x="220" y="90" width="120" height="60" rx="6" fill="#0a0a14" stroke="#334" stroke-width="1"/>
+        <path d="M180 110 Q200 110 200 130 Q200 150 220 150" stroke="#6699FF" stroke-width="2" fill="none" stroke-dasharray="6 3" opacity="0.8"/>
+        <path d="M180 128 Q200 128 200 148 Q200 148 220 148" stroke="#FF6600" stroke-width="2" fill="none" stroke-dasharray="6 3" opacity="0.7"/>
+        <circle cx="200" cy="160" r="8" fill="#4466FF" opacity="0.3"/>
+        <text x="200" y="230" text-anchor="middle" font-family="Arial" font-size="10" fill="#4466CC" letter-spacing="2" font-weight="bold">ELÉTRICA</text>
+        <text x="200" y="292" text-anchor="middle" font-family="Arial" font-size="9" fill="#555" letter-spacing="2">CONECTORES · LIMPEZA</text>
+      </svg>
+      <span class="photo-label">Conectores</span>
+    </div>
+    <div class="photo-item">
+      <svg class="photo-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="300" fill="#040804"/>
+        <path d="M80 200 L160 80 L240 80 L320 200" fill="none" stroke="#1a3a1a" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M80 200 L160 80 L240 80 L320 200" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+        <line x1="120" y1="140" x2="280" y2="140" stroke="#1a3a1a" stroke-width="12" stroke-linecap="round"/>
+        <line x1="120" y1="140" x2="280" y2="140" stroke="#CC0000" stroke-width="1.5" opacity="0.5"/>
+        <circle cx="160" cy="80" r="8" fill="#222" stroke="#CC000055" stroke-width="2"/>
+        <circle cx="240" cy="80" r="8" fill="#222" stroke="#CC000055" stroke-width="2"/>
+        <circle cx="80" cy="200" r="10" fill="#222" stroke="#CC000055" stroke-width="2"/>
+        <circle cx="320" cy="200" r="10" fill="#222" stroke="#CC000055" stroke-width="2"/>
+        <text x="200" y="258" text-anchor="middle" font-family="Arial" font-size="10" fill="#22AA22" letter-spacing="2" font-weight="bold">CHASSI</text>
+        <text x="200" y="292" text-anchor="middle" font-family="Arial" font-size="9" fill="#555" letter-spacing="2">LIMPEZA DO CHASSI</text>
+      </svg>
+      <span class="photo-label">Chassi · Estrutura</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLOSING ===== -->
+<div class="closing-section reveal">
+  <div class="closing-bg"></div>
+  <div class="closing-watermark">MOTO</div>
+  <div class="closing-inner">
+    <div class="flame-row">🔥 🏍️ 🔥</div>
+    <div class="closing-pre">Nelton Motos · Fortaleza-CE</div>
+    <h2 class="closing-title">PRONTO PARA<br><span>ACELERAR?</span></h2>
+    <p class="closing-sub">Sua moto merece o melhor — agende agora</p>
+    <div class="gear-row">
+      <div class="gear-line"></div>
+      <span class="gear">⚙️</span>
+      <span class="gear">⚙️</span>
+      <span class="gear">⚙️</span>
+      <div class="gear-line"></div>
+    </div>
+    <div class="closing-btns">
+      <button class="btn-back" onclick="history.back()">← VOLTAR</button>
+      <a class="btn-wha-main" href="https://wa.me/5585996739891" target="_blank">📱 FALAR NO WHATSAPP</a>
+    </div>
+    <div class="contact-strip">
+      <div class="contact-item"><span class="ci">📍</span>Rua Canguru N281A, Jangurussu, Fortaleza-CE</div>
+      <div class="contact-item"><span class="ci">📱</span>(85) 99673-9891</div>
+      <div class="contact-item"><span class="ci">⏰</span>Seg–Sex 08–18h · Sáb 08–13h</div>
+    </div>
+  </div>
+</div>
+
+<footer class="rev-footer">© 2025 Nelton Motos · Mecânica Especializada · Todos os direitos reservados</footer>
+
+<script>
+/* ============================================
+   DATE/TIME HELPERS
+============================================ */
+const MONTH_NAMES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+function getDaysInMonth(month1Based, year) { return new Date(year, month1Based, 0).getDate(); }
+function getNow() { return new Date(); }
+
+/* Horário de funcionamento: Seg–Sex 08–18h · Sáb 08–13h · Dom fechado */
+function getClosingHour(weekDay) {
+  return weekDay === 6 ? 13 : 18; // 6 = Sábado
+}
+
+function updateDateBadge() {
+  const now = getNow();
+  const d = String(now.getDate()).padStart(2,'0');
+  const m = String(now.getMonth()+1).padStart(2,'0');
+  document.getElementById('currentDateBadge').textContent = `${d}/${m}/${now.getFullYear()}`;
+}
+
+function populateMonths() {
+  const sel = document.getElementById('schedMonth');
+  sel.innerHTML = '<option value="">Selecione o mês...</option>';
+  const now = getNow();
+  const currMonth = now.getMonth();
+  const currYear  = now.getFullYear();
+  for (let i = 0; i < 12; i++) {
+    const m = (currMonth + i) % 12;
+    const y = currYear + Math.floor((currMonth + i) / 12);
+    const opt = document.createElement('option');
+    opt.value = `${y}-${m}`;
+    opt.textContent = `${MONTH_NAMES[m]}${y !== currYear ? ' ' + y : ''}`;
+    sel.appendChild(opt);
+  }
+}
+
+function populateDays() {
+  const monthSel = document.getElementById('schedMonth');
+  const daySel   = document.getElementById('schedDay');
+
+  daySel.innerHTML = '<option value="">Selecione o dia...</option>';
+
+  if (!monthSel.value) return;
+
+  const [year, monthIdx] = monthSel.value.split('-').map(Number);
+
+  const totalDays = getDaysInMonth(monthIdx + 1, year);
+
+  const now = getNow();
+
+  const isCurrentMonth =
+    (year === now.getFullYear() && monthIdx === now.getMonth());
+
+  const minDay = isCurrentMonth ? now.getDate() : 1;
+
+  for (let d = 1; d <= totalDays; d++) {
+
+    const date = new Date(year, monthIdx, d);
+    const weekDay = date.getDay(); // 0 = Domingo
+
+    const opt = document.createElement('option');
+
+    opt.value = d;
+
+    const isToday = isCurrentMonth && d === now.getDate();
+    const isClosedNow = isToday && now.getHours() >= getClosingHour(weekDay);
+
+    // DOMINGO BLOQUEADO
+    if (weekDay === 0) {
+      opt.disabled = true;
+      opt.textContent = `${d} • DOMINGO FECHADO`;
+    }
+
+    // DIA PASSADO
+    else if (d < minDay) {
+      opt.disabled = true;
+      opt.textContent = `${d} (passado)`;
+    }
+
+    // HOJE, MAS A LOJA JÁ FECHOU
+    else if (isClosedNow) {
+      opt.disabled = true;
+      opt.textContent = `${d} • HOJE (LOJA FECHADA)`;
+    }
+
+    // DIAS NORMAIS
+    else {
+      opt.textContent = d;
+    }
+
+    daySel.appendChild(opt);
+  }
+
+  const firstAvail =
+    daySel.querySelector('option:not([disabled]):not([value=""])');
+
+  if (firstAvail) firstAvail.selected = true;
+
+  updateTimeSlots();
+  updateSummary();
+}
+
+function updateTimeSlots() {
+  const monthSel = document.getElementById('schedMonth');
+  const daySel   = document.getElementById('schedDay');
+  const slots    = document.querySelectorAll('.time-slot');
+  if (!monthSel.value || !daySel.value) { slots.forEach(s => s.classList.remove('disabled','selected')); selectedTime = ''; return; }
+  const [year, monthIdx] = monthSel.value.split('-').map(Number);
+  const day = parseInt(daySel.value);
+  const now = getNow();
+  const isToday = (year === now.getFullYear() && monthIdx === now.getMonth() && day === now.getDate());
+  const minHour = isToday ? now.getHours() + 1 : 0;
+  const weekDay = new Date(year, monthIdx, day).getDay();
+  const isSaturday = weekDay === 6;
+  slots.forEach(s => {
+    const slotHour = parseInt(s.dataset.hour);
+    const pastSaturdayClosing = isSaturday && slotHour >= getClosingHour(weekDay); // Sábado fecha às 13h
+    if ((isToday && slotHour <= minHour) || pastSaturdayClosing) {
+      s.classList.add('disabled'); s.classList.remove('selected');
+      if (s.dataset.time === selectedTime) selectedTime = '';
+    }
+    else s.classList.remove('disabled');
+  });
+}
+
+/* ============================================
+   PLAN TABS
+============================================ */
+const tabs   = document.querySelectorAll('.plan-tab');
+const panels = document.querySelectorAll('.plan-panel');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.panel;
+    tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+    panels.forEach(p => p.classList.remove('active'));
+    tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+    const panel = document.getElementById('panel-' + target);
+    panel.classList.add('active');
+    // Leva o usuário direto até o conteúdo, sem precisar rolar manualmente
+    requestAnimationFrame(() => {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+});
+
+/* ============================================
+   MODAL STATE
+============================================ */
+let currentPlan    = '';
+let currentPrices  = [];
+let selectedBike   = '';
+let selectedTime   = '';
+let selectedPrice  = '';
+let selectedMethod = '';
+let selectedCardType = '';
+
+const backdrop = document.getElementById('modalBackdrop');
+const closeBtn = document.getElementById('modalClose');
+
+/* Calcular sinal (50%) */
+function calcSinal(price) {
+  if (!price) return null;
+  return Math.ceil(parseFloat(price) * 0.50);
+}
+
+/* Atualizar display do sinal */
+function updateSinalDisplay() {
+  const totalEl = document.getElementById('totalValue');
+  const sinalEl = document.getElementById('sinalValue');
+  if (selectedPrice) {
+    const sinal = calcSinal(selectedPrice);
+    totalEl.textContent = `R$ ${selectedPrice}`;
+    totalEl.style.color = 'var(--white)';
+    sinalEl.textContent = `R$ ${sinal}`;
+    sinalEl.classList.remove('hidden');
+  } else {
+    totalEl.textContent = '—';
+    totalEl.style.color = 'var(--chrome-dim)';
+    sinalEl.textContent = 'Selecione a moto';
+    sinalEl.classList.add('hidden');
+  }
+}
+
+/* Abre o modal de agendamento já preenchido com o plano informado */
+function openSchedulingModal(plan, prices) {
+  currentPlan   = plan;
+  currentPrices = prices;
+  document.getElementById('modalPlanName').textContent = currentPlan.toUpperCase();
+  // Reset
+  selectedBike = ''; selectedTime = ''; selectedPrice = ''; selectedMethod = ''; selectedCardType = '';
+  document.querySelectorAll('.bike-type-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
+  document.querySelectorAll('.payment-method-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.card-type-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('schedDay').innerHTML = '<option value="">Selecione o dia...</option>';
+  document.getElementById('schedName').value = '';
+  document.getElementById('scheduleSummary').classList.remove('visible');
+  document.getElementById('pixKeyInfo').classList.remove('visible');
+  document.getElementById('cardTypeInfo').classList.remove('visible');
+  document.getElementById('cardCreditNote').classList.remove('visible');
+  updateSinalDisplay();
+  updateDateBadge();
+  populateMonths();
+  updateTimeSlots();
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (window.__navState === 'maint') { __navReplace({ overlay: 'modal' }); }
+  else if (window.__navState !== 'modal') { __navPush({ overlay: 'modal' }); }
+}
+
+function closeModal() { backdrop.classList.remove('open'); document.body.style.overflow = ''; __navBack(); }
+closeBtn.addEventListener('click', closeModal);
+backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+
+/* Bike type */
+document.getElementById('bikeTypes').addEventListener('click', e => {
+  const btn = e.target.closest('.bike-type-btn');
+  if (!btn) return;
+  document.querySelectorAll('.bike-type-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedBike  = btn.dataset.bike;
+  selectedPrice = currentPrices[parseInt(btn.dataset.priceIdx)];
+  updateSinalDisplay();
+  updateSummary();
+});
+
+/* Month / Day / Time */
+document.getElementById('schedMonth').addEventListener('change', () => {
+  selectedTime = '';
+  document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+  populateDays();
+});
+document.getElementById('schedDay').addEventListener('change', () => {
+  selectedTime = '';
+  document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+  updateTimeSlots();
+  updateSummary();
+});
+document.getElementById('timeSlots').addEventListener('click', e => {
+  const slot = e.target.closest('.time-slot');
+  if (!slot || slot.classList.contains('disabled')) return;
+  document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+  slot.classList.add('selected');
+  selectedTime = slot.dataset.time;
+  updateSummary();
+});
+document.getElementById('schedName').addEventListener('input', updateSummary);
+
+/* Payment method */
+document.getElementById('paymentMethods').addEventListener('click', e => {
+  const btn = e.target.closest('.payment-method-btn');
+  if (!btn) return;
+  document.querySelectorAll('.payment-method-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedMethod = btn.dataset.method;
+  // Mostrar chave Pix só se Pix selecionado
+  const pixInfo = document.getElementById('pixKeyInfo');
+  if (selectedMethod === 'Pix') pixInfo.classList.add('visible');
+  else pixInfo.classList.remove('visible');
+  // Mostrar escolha Débito/Crédito só se Cartão selecionado
+  const cardInfo = document.getElementById('cardTypeInfo');
+  if (selectedMethod === 'Cartão') {
+    cardInfo.classList.add('visible');
+  } else {
+    cardInfo.classList.remove('visible');
+    selectedCardType = '';
+    document.querySelectorAll('.card-type-btn').forEach(b => b.classList.remove('selected'));
+    document.getElementById('cardCreditNote').classList.remove('visible');
+  }
+  updateSummary();
+});
+
+/* Débito ou Crédito */
+document.getElementById('cardTypeGrid').addEventListener('click', e => {
+  const btn = e.target.closest('.card-type-btn');
+  if (!btn) return;
+  document.querySelectorAll('.card-type-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedCardType = btn.dataset.cardtype;
+  const creditNote = document.getElementById('cardCreditNote');
+  if (selectedCardType === 'Crédito') creditNote.classList.add('visible');
+  else creditNote.classList.remove('visible');
+  updateSummary();
+});
+
+/* Copiar chave Pix */
+document.getElementById('pixCopyBtn').addEventListener('click', () => {
+  const key = document.getElementById('pixKeyValue').textContent;
+  const cleanKey = key.replace(/\D/g,''); // só números
+  navigator.clipboard.writeText(cleanKey).then(() => {
+    const btn = document.getElementById('pixCopyBtn');
+    btn.textContent = '✓ COPIADO';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'COPIAR'; btn.classList.remove('copied'); }, 2500);
+  }).catch(() => {
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = cleanKey; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    const btn = document.getElementById('pixCopyBtn');
+    btn.textContent = '✓ COPIADO'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'COPIAR'; btn.classList.remove('copied'); }, 2500);
+  });
+});
+
+function getSelectedMonthLabel() {
+  const sel = document.getElementById('schedMonth');
+  return sel.options[sel.selectedIndex]?.text || '';
+}
+
+function updateSummary() {
+  const monthVal   = document.getElementById('schedMonth').value;
+  const day        = document.getElementById('schedDay').value;
+  const name       = document.getElementById('schedName').value.trim();
+  const summary    = document.getElementById('scheduleSummary');
+  const monthLabel = getSelectedMonthLabel();
+  if (selectedBike && monthVal && day && selectedTime) {
+    const sinal = selectedPrice ? calcSinal(selectedPrice) : null;
+    const priceText = selectedPrice ? ` — <strong>R$${selectedPrice}</strong>` : '';
+    const sinalText = sinal ? `<br>💰 Sinal de reserva (50%): <strong style="color:var(--gold)">R$${sinal}</strong>` : '';
+    const methodLabel = selectedMethod === 'Cartão' && selectedCardType
+      ? `Cartão (${selectedCardType})`
+      : selectedMethod;
+    const methodText = selectedMethod ? `<br>💳 Pagamento do sinal: <strong>${methodLabel}</strong>` : '';
+    const creditNoteText = (selectedMethod === 'Cartão' && selectedCardType === 'Crédito')
+      ? `<br><span style="color:var(--gold);">⚠️ Observação: Acréscimo da máquina</span>`
+      : '';
+    const horaNum = parseInt(selectedTime.split(':')[0], 10);
+    const deliveryText = horaNum >= 14 ? `<br>🌙 <strong style="color:var(--gold)">Entrega no dia seguinte</strong> (horário após 14h)` : '';
+    summary.innerHTML =
+      `📋 <strong>${currentPlan}</strong>${priceText}<br>` +
+      `🏍️ ${selectedBike}` +
+      sinalText + methodText + creditNoteText + `<br>` +
+      `📅 ${day} de ${monthLabel} às ${selectedTime}` + deliveryText +
+      (name ? `<br>👤 ${name}` : '');
+    summary.classList.add('visible');
+  } else {
+    summary.classList.remove('visible');
+  }
+}
+
+/* ============================================
+   WHATSAPP — MENSAGEM ELABORADA
+============================================ */
+document.getElementById('btnWhatsApp').addEventListener('click', () => {
+  const monthVal   = document.getElementById('schedMonth').value;
+  const day        = document.getElementById('schedDay').value;
+  const name       = document.getElementById('schedName').value.trim();
+  const monthLabel = getSelectedMonthLabel();
+
+  if (!selectedBike)   { alert('Por favor, selecione o tipo da moto.'); return; }
+  if (!monthVal || !day) { alert('Por favor, selecione o mês e o dia.'); return; }
+  if (!selectedTime)   { alert('Por favor, selecione o horário.'); return; }
+  if (!selectedMethod) { alert('Por favor, selecione a forma de pagamento do sinal.'); return; }
+  if (selectedMethod === 'Cartão' && !selectedCardType) { alert('Por favor, selecione se o cartão é Débito ou Crédito.'); return; }
+
+  const sinal     = selectedPrice ? calcSinal(selectedPrice) : null;
+  const nameStr   = name ? `\nNome: *${name}*` : '';
+  const priceStr  = selectedPrice ? `\nValor total do serviço: *R$ ${selectedPrice}*` : '';
+  const sinalStr  = sinal ? `\nSinal de reserva (50%): *R$ ${sinal}*` : '';
+
+  const horaNum = parseInt(selectedTime.split(':')[0], 10);
+  const deliveryStr = horaNum >= 14
+    ? `\nObservação: horários a partir das 14h têm entrega prevista para o dia seguinte.`
+    : '';
+
+  // Mensagem específica por forma de pagamento
+  let paymentInstructions = '';
+  if (selectedMethod === 'Pix') {
+    paymentInstructions =
+      `Forma de pagamento do sinal: *Pix*\n` +
+      `Chave Pix (telefone): *(85) 99673-9891*\n` +
+      `Solicito o envio do comprovante nesta conversa para a confirmação definitiva do agendamento.`;
+  } else if (selectedMethod === 'Cartão') {
+    const cardLabel = `Cartão de ${selectedCardType}`;
+    paymentInstructions =
+      `Forma de pagamento do sinal: *${cardLabel}*\n` +
+      `O pagamento será realizado presencialmente, na chegada à loja, através da maquininha.` +
+      (selectedCardType === 'Crédito'
+        ? `\nObservação: pagamentos no crédito estão sujeitos a acréscimo referente à taxa da máquina.`
+        : '');
+  } else if (selectedMethod === 'Dinheiro') {
+    paymentInstructions =
+      `Forma de pagamento do sinal: *Dinheiro*\n` +
+      `Solicito que o valor do sinal seja trazido em espécie no dia do agendamento.`;
+  }
+
+  const msg =
+    `*AGENDAMENTO DE REVISÃO — NELTON MOTOS*\n` +
+    `------------------------------------------\n\n` +
+    `Prezado Nelton, gostaria de solicitar a confirmação do seguinte agendamento de revisão:\n\n` +
+    `Plano contratado: *${currentPlan}*\n` +
+    `Tipo da moto: *${selectedBike}*` +
+    priceStr + sinalStr + `\n` +
+    `Data prevista: *${day} de ${monthLabel}*\n` +
+    `Horário preferido: *${selectedTime}*` +
+    deliveryStr +
+    nameStr + `\n\n` +
+    paymentInstructions + `\n\n` +
+    `------------------------------------------\n` +
+    `Política de reserva: o sinal de 50% é responsável por garantir o horário reservado. Em caso de desistência, o valor do sinal não é reembolsável; no entanto, havendo aviso prévio de 24 horas, o reagendamento para uma nova data poderá ser realizado sem custo adicional.\n\n` +
+    `Fico no aguardo da confirmação para dar continuidade ao agendamento. Agradeço desde já pela atenção.`;
+
+  const url = `https://wa.me/5585996739891?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+});
+
+/* ============================================
+   ÁREA DE MANUTENÇÃO (Carrinho de Serviços)
+============================================ */
+let maintItems = []; // { id, plan, prices }
+
+const maintFab       = document.getElementById('maintFab');
+const maintBadge     = document.getElementById('maintBadge');
+const maintOverlay   = document.getElementById('maintOverlay');
+const maintDrawer    = document.getElementById('maintDrawer');
+const maintDrawerBody= document.getElementById('maintDrawerBody');
+const maintToast     = document.getElementById('maintToast');
+const maintToastText = document.getElementById('maintToastText');
+
+const PLAN_PRICE_LABELS = [
+  'Pequena (50cc até 150cc)',
+  'Média (160cc até 190cc)',
+  'Grande (200cc até 600cc)'
+];
+
+function priceRangeLabel(prices) {
+  const nums = prices.map(p => parseFloat(p));
+  const min = Math.min(...nums), max = Math.max(...nums);
+  return `R$ ${min} — R$ ${max}`;
+}
+
+function showMaintToast(text) {
+  maintToastText.innerHTML = text;
+  maintToast.classList.add('show');
+  clearTimeout(showMaintToast._t);
+  showMaintToast._t = setTimeout(() => maintToast.classList.remove('show'), 2800);
+}
+
+function bumpFab() {
+  maintFab.classList.remove('bump');
+  void maintFab.offsetWidth; // reflow para reiniciar animação
+  maintFab.classList.add('bump');
+}
+
+function updateMaintBadge() {
+  maintBadge.textContent = maintItems.length;
+  maintBadge.classList.toggle('show', maintItems.length > 0);
+}
+
+function addToMaintenance(plan, prices) {
+  const exists = maintItems.find(i => i.plan === plan);
+  if (exists) {
+    showMaintToast(`<strong>${plan}</strong> já está na sua Área de Manutenção.`);
+    openMaintDrawer();
+    return;
+  }
+  const id = 'm' + Date.now();
+  maintItems.push({ id, plan, prices });
+  updateMaintBadge();
+  bumpFab();
+  renderMaintDrawer();
+  showMaintToast(`<strong>${plan}</strong> adicionada à Área de Manutenção.`);
+  openMaintDrawer();
+}
+
+function removeFromMaintenance(id) {
+  maintItems = maintItems.filter(i => i.id !== id);
+  updateMaintBadge();
+  renderMaintDrawer();
+}
+
+function renderMaintDrawer() {
+  if (maintItems.length === 0) {
+    maintDrawerBody.innerHTML = `
+      <div class="maint-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="maint-empty-title">Nenhuma revisão selecionada</div>
+        <div class="maint-empty-text">Escolha um dos pacotes de revisão abaixo para montar sua ordem de serviço e agendar em poucos cliques.</div>
+      </div>`;
+    return;
+  }
+
+  maintDrawerBody.innerHTML = maintItems.map(item => `
+    <div class="maint-item" data-id="${item.id}">
+      <div class="maint-item-top">
+        <div>
+          <div class="maint-item-tag">Serviço selecionado</div>
+          <div class="maint-item-name">${item.plan}</div>
+        </div>
+        <button class="maint-item-remove" data-remove="${item.id}" aria-label="Remover">✕</button>
+      </div>
+      <div class="maint-item-prices">
+        ${item.prices.map((p, i) => `<span class="maint-item-price-pill">${PLAN_PRICE_LABELS[i]}: <b>R$${p}</b></span>`).join('')}
+      </div>
+      <div class="maint-item-sinal-note">💰 Sinal de reserva: <b>50% do valor total</b> na confirmação do agendamento</div>
+      <div class="maint-item-actions">
+        <button class="maint-item-schedule" data-schedule="${item.id}">📅 Agendar Agora</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openMaintDrawer() {
+  maintOverlay.classList.add('open');
+  maintDrawer.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (window.__navState !== 'maint') { __navPush({ overlay: 'maint' }); }
+}
+function closeMaintDrawer() {
+  maintOverlay.classList.remove('open');
+  maintDrawer.classList.remove('open');
+  document.body.style.overflow = '';
+  __navBack();
+}
+
+maintFab.addEventListener('click', () => { renderMaintDrawer(); openMaintDrawer(); });
+document.getElementById('maintDrawerClose').addEventListener('click', closeMaintDrawer);
+maintOverlay.addEventListener('click', closeMaintDrawer);
+
+maintDrawerBody.addEventListener('click', e => {
+  const removeBtn = e.target.closest('[data-remove]');
+  if (removeBtn) { removeFromMaintenance(removeBtn.dataset.remove); return; }
+
+  const scheduleBtn = e.target.closest('[data-schedule]');
+  if (scheduleBtn) {
+    const item = maintItems.find(i => i.id === scheduleBtn.dataset.schedule);
+    if (!item) return;
+    maintOverlay.classList.remove('open');
+    maintDrawer.classList.remove('open');
+    document.body.style.overflow = '';
+    openSchedulingModal(item.plan, item.prices);
+  }
+});
+
+/* Botões "Escolher Revisão" -> adicionam à Área de Manutenção */
+document.querySelectorAll('.btn-schedule').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const plan   = btn.dataset.plan;
+    const prices = JSON.parse(btn.dataset.prices);
+    addToMaintenance(plan, prices);
+  });
+});
+
+updateMaintBadge();
+renderMaintDrawer();
+
+/* ============================================
+   SCROLL REVEAL
+============================================ */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* ============================================
+   INIT
+============================================ */
+updateDateBadge();
+
+/* ============================================
+   NAVEGAÇÃO PELO BOTÃO VOLTAR (histórico do navegador)
+   Garante que o botão físico/gestual de VOLTAR do celular
+   feche apenas a tela/painel aberto (modal de agendamento ou
+   Área de Manutenção), em vez de sair do site direto.
+============================================ */
+window.__navDepth = 0;
+window.__navState = null; // null | 'modal' | 'maint'
+
+window.__navPush = function (data) {
+  window.__navDepth++;
+  window.__navState = data.overlay;
+  history.pushState(Object.assign({ __navDepth: window.__navDepth }, data), '', location.href);
+};
+window.__navReplace = function (data) {
+  window.__navState = data.overlay;
+  history.replaceState(Object.assign({ __navDepth: window.__navDepth }, data), '', location.href);
+};
+window.__navBack = function () {
+  if (window.__navDepth > 0) { history.back(); }
+};
+window.__applyNavState = function (state) {
+  const wantModal = !!(state && state.overlay === 'modal');
+  const wantMaint = !!(state && state.overlay === 'maint');
+  window.__navState = wantModal ? 'modal' : (wantMaint ? 'maint' : null);
+
+  const modalOpen = backdrop.classList.contains('open');
+  const maintOpen = maintDrawer.classList.contains('open');
+
+  if (wantModal && !modalOpen) { backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  if (!wantModal && modalOpen) { backdrop.classList.remove('open'); document.body.style.overflow = ''; }
+
+  if (wantMaint && !maintOpen) { maintOverlay.classList.add('open'); maintDrawer.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  if (!wantMaint && maintOpen) { maintOverlay.classList.remove('open'); maintDrawer.classList.remove('open'); document.body.style.overflow = ''; }
+
+  if (!wantModal && !wantMaint) { document.body.style.overflow = ''; }
+};
+window.addEventListener('popstate', function (e) {
+  const st = e.state || {};
+  window.__navDepth = st.__navDepth || 0;
+  window.__applyNavState(st);
+});
+history.replaceState({ __navDepth: 0 }, '', location.href);
+</script>
+</body>
+</html>
